@@ -1,17 +1,32 @@
 "use client"
-import { useState } from "react"
-
+import { useState } from "react";
+// import "./envConfig"
+type inputs = {
+  email: string
+  firstName: string
+  lastName: string
+  amount: number
+}
 export default function Home() {
-  const [email, setEmail] = useState("")
-  const [amount, setAmount] = useState("")
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
+  const [data, setData] = useState<inputs>({
+    email: "",
+    firstName: "",
+    lastName: "",
+    amount: 0,
+  })
 
+  // ==== handle change
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = e.target
+    setData({
+      ...data,
+      [name]: value
+
+    })
+  }
   // ====== Make payment
-  const completePayment = (e: any) => {
-    e.preventDefault()
-    console.log(e)
-    alert("Sumitted")
+  const completePayment = () => {
+    alert(process.env.PAY_SECRETKEY)
   }
 
   return (
@@ -20,32 +35,32 @@ export default function Home() {
         <form action="" className="border border-white border-solid bg-white p-10">
           <div className="pb-5">
             <input type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={data.email}
+              onChange={handleChange}
               className="bg-black p-2" 
               placeholder="Email address" 
             />
           </div>
           <div className="pb-5">
             <input type="text"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)} 
+              value={data.amount}
+              onChange={handleChange} 
               className="bg-black p-2" 
               placeholder="Enter Amount" 
             />
           </div>
           <div className="pb-5">
             <input type="text"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)} 
+              value={data.firstName}
+              onChange={handleChange} 
               className="bg-black p-2" 
               placeholder="First Name" 
             />
           </div>
           <div className="">
             <input type="text"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)} 
+              value={data.lastName}
+              onChange={handleChange} 
               className="bg-black p-2" 
               placeholder="Last Name" 
             />
