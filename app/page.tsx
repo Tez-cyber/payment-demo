@@ -5,28 +5,28 @@ type inputs = {
   email: string
   firstName: string
   lastName: string
-  amount: number
+  amount: string
 }
 export default function Home() {
   const [data, setData] = useState<inputs>({
     email: "",
     firstName: "",
     lastName: "",
-    amount: 0,
+    amount: "",
   })
 
   // ==== handle change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = e.target
-    setData({
-      ...data,
+    const { name, value } = e.target
+    setData((prev) => ({
+      ...prev,
       [name]: value
 
-    })
+    }))
   }
   // ====== Make payment
   const completePayment = () => {
-    alert(process.env.PAY_SECRETKEY)
+    alert(data.firstName)
   }
 
   return (
@@ -35,42 +35,46 @@ export default function Home() {
         <form action="" className="border border-white border-solid bg-white p-10">
           <div className="pb-5">
             <input type="email"
+              name="email"
               value={data.email}
               onChange={handleChange}
-              className="bg-black p-2" 
-              placeholder="Email address" 
+              className="bg-black p-2"
+              placeholder="Email address"
             />
           </div>
           <div className="pb-5">
             <input type="text"
+              name="amount"
               value={data.amount}
-              onChange={handleChange} 
-              className="bg-black p-2" 
-              placeholder="Enter Amount" 
+              onChange={handleChange}
+              className="bg-black p-2"
+              placeholder="Enter Amount"
             />
           </div>
           <div className="pb-5">
             <input type="text"
+              name="firstName"
               value={data.firstName}
-              onChange={handleChange} 
-              className="bg-black p-2" 
-              placeholder="First Name" 
+              onChange={handleChange}
+              className="bg-black p-2"
+              placeholder="First Name"
             />
           </div>
           <div className="">
             <input type="text"
+              name="lastName"
               value={data.lastName}
-              onChange={handleChange} 
-              className="bg-black p-2" 
-              placeholder="Last Name" 
+              onChange={handleChange}
+              className="bg-black p-2"
+              placeholder="Last Name"
             />
           </div>
           {/* ==== Submit button ==== */}
           <div className="my-5 flex items-center justify-center text-black">
             <input type="submit"
-              onClick={completePayment} 
-              className="border-[2px] border-black border-solid py-2 px-10 rounded-md" 
-              value="Make payment" 
+              onClick={completePayment}
+              className="border-[2px] border-black border-solid py-2 px-10 rounded-md"
+              value="Make payment"
             />
           </div>
         </form>
