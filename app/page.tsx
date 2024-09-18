@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react";
 import Script from "next/script";
-// import "./envConfig"
+
 type inputProp = {
   email: string
   firstName: string
@@ -34,7 +34,6 @@ export default function Home() {
     <>
       <div className="flex items-center justify-center my-[10%]">
         <form action="" className="border border-white border-solid bg-white p-10">
-          <Script src="https://js.paystack.co/v1/inline.js" />
           <div className="pb-5">
             <input type="email"
               name="email"
