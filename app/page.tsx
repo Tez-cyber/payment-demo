@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import Script from "next/script";
+import { PaystackButton } from "react-paystack";
 
 type inputProp = {
   email: string
