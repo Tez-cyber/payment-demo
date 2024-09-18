@@ -1,40 +1,71 @@
+"use client"
+import React, { useState } from 'react';
+import { PaystackButton } from 'react-paystack';
 
 
-export default function Home() {
-    return (
-        <>
-            <div className="flex items-center justify-center my-[10%]">
-                <form action="" className="border border-white border-solid bg-white shadow-lg p-10 w-1/3">
-                    <div className="pb-5">
-                        <input type="email"
-                            name="email"
-                            className="input_box"
-                            placeholder="Email address"
-                        />
-                    </div>
-                    <div className="pb-5">
-                        <input type="text"
-                            name="amount"
-                            className="p-2"
-                            placeholder="Enter Amount"
-                        />
-                    </div>
-                    <div className="pb-5">
-                        <input type="text"
-                            name="firstName"
-                            className="p-2"
-                            placeholder="First Name"
-                        />
-                    </div>
-                    <div className="">
-                        <input type="text"
-                            name="lastName"
-                            className="p-2"
-                            placeholder="Last Name"
-                        />
-                    </div>
-                </form>
+const App = () => {
+  const publicKey = "pk_test_0666a34b32f00f0a11861b4e4730e8757f393352";
+  const amount = 1000000;
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+
+  const resetForm = () => {
+    setEmail('');
+    setName('');
+    setPhone('');
+  };
+
+  const componentProps = {
+    email,
+    amount,
+    publicKey,
+    text: 'Buy Now',
+    onSuccess: (reference: string) => {
+      alert(
+        `Your purchase was successful! Transaction reference: ${reference}`
+      );
+      resetForm();
+    },
+    onClose: () => alert("You can start again!!!!"),
+  };
+
+  return (
+    <div className="App">
+        <div className="checkout">
+          <div className="checkout-form">
+            <div className="checkout-field">
+              <label>Name</label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
-        </>
-    )
-}
+            <div className="checkout-field">
+              <label>Email</label>
+              <input
+                type="text"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="checkout-field">
+              <label>Phone</label>
+              <input
+                type="text"
+                id="phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+            <PaystackButton className="paystack-button" {...componentProps} />
+          </div>
+        </div>
+    </div>
+  );
+};
+
+export default App;

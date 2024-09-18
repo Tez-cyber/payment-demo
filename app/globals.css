@@ -4,6 +4,6 @@
 
 @layer utilities {
     .input_box {
-        @apply p-2 border-[1.5px] rounded w-full border-gray-200
+        @apply p-2 outline-none border-[1.5px] rounded w-full border-gray-200
     }
 }
